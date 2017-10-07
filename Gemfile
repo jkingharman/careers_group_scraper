@@ -8,7 +8,7 @@ end
 
 group :development do
   gem 'mechanize'
+  gem 'json'
   gem 'nokogiri'
   gem 'pry'
-  gem 'rspec'
 end
