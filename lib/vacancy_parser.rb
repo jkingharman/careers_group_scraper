@@ -3,7 +3,7 @@
 class VacancyParser
   private
 
-  attr_reader :html_doc, :html_parser, :vacancies
+  attr_reader :html_parser, :vacancies
 
   def initialize(html_parser = Nokogiri)
     @html_parser = html_parser

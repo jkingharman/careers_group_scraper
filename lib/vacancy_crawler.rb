@@ -19,7 +19,7 @@ class VacancyCrawler
 
   def set_listing_url
     @page_count += 1
-    @listing_url = "#{BASE_URL}/Vacancies.aspx?st=#{search_term}&page=#{@page_count}"
+    @listing_url = "#{BASE_URL}/Vacancies.aspx?st=#{search_term}&page=#{page_count}"
   end
 
   def visit(url = listing_url)
