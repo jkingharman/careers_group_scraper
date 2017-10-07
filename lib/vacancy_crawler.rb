@@ -2,17 +2,24 @@
 
 class VacancyCrawler
   BASE_URL = 'https://jobonline.thecareersgroup.co.uk/careersgroup/student/'.freeze
+  PAGINATION_LIMIT = 3 # return to manually investigate listing
 
   private
 
-  attr_reader :listing_url, :vacancy_links, :client_class, :page_count
+  attr_reader :vacancy_links, :client_class, :page_count, :search_term, :listing_url
   attr_accessor :client
 
-  def initialize(client_class = Mechanize, search_term = nil)
-    @page_count = 1
+  def initialize(search_term = nil, client_class = Mechanize)
+    @page_count = 0
     @vacancy_links = []
+    @search_term = search_term
     @client_class = client_class
-    @listing_url = "#{BASE_URL}/Vacancies.aspx?st=#{search_term}&page=#{page_count}"
+    @listing_url = set_listing_url
+  end
+
+  def set_listing_url
+    @page_count += 1
+    @listing_url = "#{BASE_URL}/Vacancies.aspx?st=#{search_term}&page=#{@page_count}"
   end
 
   def visit(url = listing_url)
@@ -29,19 +36,19 @@ class VacancyCrawler
   end
 
   def get_each_vacancy_link_on_every_listing
-    1.times { get_each_vacancy_link; @page_count += 1 }
+    PAGINATION_LIMIT.times { get_each_vacancy_link; set_listing_url }
   end
 
-  def get_vacancy_at(link)
+  def get_vacancy_doc_at(link)
     visit((BASE_URL + link.href).to_s).body
   end
 
   public
 
-  def get_vacancies
-    vacancies = []
+  def get_all_vacancy_docs
+    vacancy_docs = []
     get_each_vacancy_link_on_every_listing
-    vacancy_links.each { |link| vacancies << get_vacancy_at(link) }
-    vacancies
+    vacancy_links.each { |link| vacancy_docs << get_vacancy_doc_at(link) }
+    vacancy_docs
   end
 end

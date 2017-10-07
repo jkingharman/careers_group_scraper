@@ -3,35 +3,38 @@
 class VacancyParser
   private
 
-  attr_reader :html_doc, :html_parser, :vacancy_details
+  attr_reader :html_doc, :html_parser, :vacancies
 
-  def initialize(doc, parser = Nokogiri)
-    @html_doc = doc
-    @html_parser = parser
-    @vacancy_details = {}
+  def initialize(html_parser = Nokogiri)
+    @html_parser = html_parser
+    @vacancies = []
   end
 
-  def parse_html
-    parsed_doc ||= html_parser::HTML(html_doc)
+  def parse_html(doc)
+    parsed_doc ||= html_parser::HTML(doc)
   end
 
-  def target_vacancy_details
-    parse_html.css('#ctl00_ContentPlaceHolder1_DisplayVacancyUC1_pnlRounded div[3] b')
+  def target_vacancy_details(doc)
+    parse_html(doc).css('#ctl00_ContentPlaceHolder1_DisplayVacancyUC1_pnlRounded div[3] b')
   end
 
-  def get_vacancy_details
-    target_vacancy_details.each { |detail| @vacancy_details[detail.text] = detail.next.text unless detail.text == 'Job sector:' }
+  def get_vacancy_details(doc)
+    target_vacancy_details(doc).each { |vacancy| vacancies << Hash[vacancy.text, vacancy.next.text] unless vacancy.text == 'Job sector:' }
   end
 
   def scrub_vacancy_details
-    vacancy_details.each { |key, val| @vacancy_details[key] = val.strip }
+    vacancies.each { |vacancy| vacancy.each { |key, val| vacancy[key] = val.strip } }
+  end
+
+  def parse_one_vacancy_in(doc)
+    get_vacancy_details(doc)
+    scrub_vacancy_details
   end
 
   public
 
-  def get_parsed_details
-    get_vacancy_details
-    scrub_vacancy_details
-    vacancy_details
+  def parse_all_vacancies_in(vacancy_docs)
+    vacancy_docs.each { |doc| parse_one_vacancy_in(doc) }
+    vacancies
   end
 end

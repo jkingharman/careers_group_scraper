@@ -3,10 +3,10 @@
 require_relative '../lib/json_persister'
 
 describe JSONPersister do
-  let(:vacancy_details) do
-    { 'Recruiter' => 'Anon', 'Salary' => '£20,000', 'Location' => 'LDN',
+  let(:vacancies) do
+    [{ 'Recruiter' => 'Anon', 'Salary' => '£20,000', 'Location' => 'LDN',
       'Job type' => 'Placement', 'Hours' => 'Full-time', 'Data posted' => '03/10/2017',
-      'Degree Level' => 'Bachelor' }
+      'Degree Level' => 'Bachelor' }]
   end
   subject(:json_persister) { described_class.new }
 
@@ -14,7 +14,7 @@ describe JSONPersister do
 
   describe '#perform' do
     it 'will convert the vacancy details to json' do
-      expect(json_persister.perform(vacancy_details)).to eq('{"Recruiter":"Anon","Salary":"£20,000","Location":"LDN","Job type":"Placement","Hours":"Full-time","Data posted":"03/10/2017","Degree Level":"Bachelor"}')
+      expect(json_persister.perform(vacancies)).to eq(['{"Recruiter":"Anon","Salary":"£20,000","Location":"LDN","Job type":"Placement","Hours":"Full-time","Data posted":"03/10/2017","Degree Level":"Bachelor"}'])
     end
   end
 end

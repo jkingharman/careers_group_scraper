@@ -14,7 +14,8 @@ class GenericProcessor
   public
 
   def persist!
-    vacancy_details = parser.get_parsed_details(crawler.get_vacancies)
-    persister.perform(vacancy_details)
+    vacancy_docs = crawler.get_all_vacancy_docs
+    vacancies = parser.parse_all_vacancies_in(vacancy_docs)
+    persister.perform(vacancies)
   end
 end
