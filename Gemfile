@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 group :test do
   gem 'json'
+  gem 'nokogiri'
   gem 'rspec'
 end
 

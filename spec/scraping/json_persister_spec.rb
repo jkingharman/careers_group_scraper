@@ -1,6 +1,7 @@
 
 
 require_relative '../../lib/scraping/persisters/json_persister'
+require 'json'
 
 describe JSONPersister do
   let(:vacancies) do

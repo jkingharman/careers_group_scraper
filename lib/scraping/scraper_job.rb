@@ -1,18 +1,7 @@
 
-require 'mechanize'
-require 'nokogiri'
-require 'json'
-
-require_relative 'generic_processor'
-require_relative 'vacancy_crawler'
-require_relative 'vacancy_parser'
-require_relative 'json_persister'
-require_relative 'scraper_job'
 
 class ScraperJob
-  def perform(search_term = nil)
-    GenericProcessor.new(VacancyCrawler.new(search_term), VacancyParser.new, JSONPersister.new).persist!
+  def perform(processor_class, crawler_class, parser_class, persister_class, search_term = nil)
+    processor_class.new(crawler_class.new(search_term), parser_class.new, persister_class.new).persist!
   end
 end
-
-ScraperJob.new.perform

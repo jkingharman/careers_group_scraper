@@ -14,8 +14,8 @@ class GenericProcessor
   public
 
   def persist!
-    vacancy_docs = crawler.get_all_vacancy_docs # not taking advatnage of ducktyping!!!
-    vacancies = parser.parse_all_data_in(vacancy_docs)
-    persister.perform(vacancies)
+    docs = crawler.get_all_docs
+    parsed_data = parser.parse_all_data_in(docs)
+    persister.perform(parsed_data)
   end
 end

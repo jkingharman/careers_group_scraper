@@ -1,5 +1,4 @@
 
-require 'json'
 
 class JSONPersister
   def perform(data_to_persist)
