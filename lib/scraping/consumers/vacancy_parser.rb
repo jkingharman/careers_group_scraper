@@ -33,7 +33,7 @@ class VacancyParser
 
   public
 
-  def parse_all_vacancies_in(vacancy_docs)
+  def parse_all_data_in(vacancy_docs)
     vacancy_docs.each { |doc| parse_one_vacancy_in(doc) }
     vacancies
   end

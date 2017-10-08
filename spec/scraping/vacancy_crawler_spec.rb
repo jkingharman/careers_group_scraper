@@ -1,8 +1,7 @@
 
-require_relative '../lib/vacancy_crawler'
+require_relative '../../lib/scraping/producers/vacancy_crawler'
 
 describe VacancyCrawler do
-
   let(:client_class) { double(:client_class, new: client) }
   let(:search_term) { nil }
   let(:client) { double(:client, get: listing_page) }
@@ -25,11 +24,11 @@ describe VacancyCrawler do
     # I may need to test outgoing message here. Research and return
 
     it 'will scrap links to specific vacencies (and only vacencies) from job listing pages' do
-      expect { vacancy_crawler.get_all_vacancy_docs }.to change { vacancy_crawler.send(:vacancy_links) }.from([]).to([vacancy_link_one])
+      expect { vacancy_crawler.get_all_docs }.to change { vacancy_crawler.send(:vacancy_links) }.from([]).to([vacancy_link_one])
     end
 
     it 'will scrap specific vacancy pages' do
-      expect(vacancy_crawler.get_all_vacancy_docs).to eq([html])
+      expect(vacancy_crawler.get_all_docs).to eq([html])
     end
   end
 end

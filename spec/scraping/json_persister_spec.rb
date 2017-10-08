@@ -1,12 +1,12 @@
 
 
-require_relative '../lib/json_persister'
+require_relative '../../lib/scraping/persisters/json_persister'
 
 describe JSONPersister do
   let(:vacancies) do
     [{ 'Recruiter' => 'Anon', 'Salary' => '£20,000', 'Location' => 'LDN',
-      'Job type' => 'Placement', 'Hours' => 'Full-time', 'Data posted' => '03/10/2017',
-      'Degree Level' => 'Bachelor' }]
+       'Job type' => 'Placement', 'Hours' => 'Full-time', 'Data posted' => '03/10/2017',
+       'Degree Level' => 'Bachelor' }]
   end
   subject(:json_persister) { described_class.new }
 

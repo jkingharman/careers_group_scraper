@@ -1,9 +1,9 @@
 
-require_relative '../lib/generic_processor'
+require_relative '../../lib/scraping/generic_processor'
 
 describe GenericProcessor do
   let(:crawler) { double(:crawler, get_all_vacancy_docs: nil) }
-  let(:parser) { double(:parser, parse_all_vacancies_in: vacancy_details) }
+  let(:parser) { double(:parser, parse_all_data_in: vacancy_details) }
   let(:vacancy_details) { nil }
   let(:persister) { double(:persister) }
 
@@ -19,7 +19,7 @@ describe GenericProcessor do
     end
 
     it 'will get vacancy details from the parser' do
-      expect(parser).to receive(:parse_all_vacancies_in)
+      expect(parser).to receive(:parse_all_data_in)
       generic_persister.persist!
     end
 

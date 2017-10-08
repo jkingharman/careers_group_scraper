@@ -45,7 +45,7 @@ class VacancyCrawler
 
   public
 
-  def get_all_vacancy_docs
+  def get_all_docs
     vacancy_docs = []
     get_each_vacancy_link_on_every_listing
     vacancy_links.each { |link| vacancy_docs << get_vacancy_doc_at(link) }
