@@ -5,9 +5,11 @@ group :test do
   gem 'json'
   gem 'nokogiri'
   gem 'rspec'
+  gem 'rake'
 end
 
 group :development do
+  gem 'rake'
   gem 'mechanize'
   gem 'nokogiri'
   gem 'pry'
