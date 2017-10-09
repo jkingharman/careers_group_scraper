@@ -14,6 +14,6 @@ namespace :scrap do
   desc 'Jsonify data on job vacancies from careers group'
   task :vacancies_to_json, [:search_term] do |_t, args|
     ScraperJob.new.perform(GenericProcessor, VacancyCrawler,
-    VacancyParser, JSONPersister, args[:search_term])
+                           VacancyParser, JSONPersister, args[:search_term])
   end
 end
