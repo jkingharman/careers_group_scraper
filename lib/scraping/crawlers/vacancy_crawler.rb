@@ -2,7 +2,7 @@
 
 class VacancyCrawler
   BASE_URL = 'https://jobonline.thecareersgroup.co.uk/careersgroup/student/'.freeze
-  PAGINATION_LIMIT = 3 # return to manually investigate listing
+  PAGINATION_LIMIT = 20 # return to manually investigate listing
 
   private
 

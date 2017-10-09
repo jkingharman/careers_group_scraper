@@ -1,5 +1,5 @@
 
-require_relative '../../lib/scraping/producers/vacancy_crawler'
+require_relative '../../lib/scraping/crawlers/vacancy_crawler'
 
 describe VacancyCrawler do
   let(:client_class) { double(:client_class, new: client) }
@@ -20,8 +20,6 @@ describe VacancyCrawler do
       VacancyCrawler::PAGINATION_LIMIT = 1
       allow(client).to receive(:get).with((VacancyCrawler::BASE_URL + vacancy_link_one.href).to_s).and_return(vacancy_page)
     end
-
-    # I may need to test outgoing message here. Research and return
 
     it 'will scrap links to specific vacencies (and only vacencies) from job listing pages' do
       expect { vacancy_crawler.get_all_docs }.to change { vacancy_crawler.send(:vacancy_links) }.from([]).to([vacancy_link_one])

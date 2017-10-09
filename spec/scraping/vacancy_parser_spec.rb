@@ -1,6 +1,6 @@
 
 
-require_relative '../../lib/scraping/consumers/vacancy_parser'
+require_relative '../../lib/scraping/parsers/vacancy_parser'
 require 'nokogiri'
 
 describe VacancyParser do
