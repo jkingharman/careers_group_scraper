@@ -17,7 +17,6 @@ $ rake scrap:vacancies_to_json[marketing]
 
 ```
 $ rspec
-
 ```
 
 ## Major dependencies ##
@@ -56,7 +55,7 @@ I used these generic classes to help me reason about my own specific scraping do
 * __Efficient and effective vacancy detail extraction__. I couldn't find a pattern in the html that would allow me to extract all the required data in one css selection. The group of elements I targeted held five pieces of relevant data but missed two major ones: job description and job title. I omitted these because I felt another, separate selection would put me on the road to code bloat. But I'm not sure this was the right choice. However the scraped data is used, those details seem important to have commercially.
 
 
-* __Efficient link extraction__. To get links to specific vacancies my first idea was to spider the site - to use Capybara to click through each listing page. This felt clunky. Fortunately, I realised I could exploit pagination instead. I could simply increment the page number in the url. But this raised a new problem: when to stop incrementing? I searched for a pattern I could exploit — something, for instance, like a last page attribute in a href attribute of a relevant link — but I couldn’t find anything. Right now, my stopping condition is near enough arbitrary number.
+* __Efficient link extraction__. To get links to specific vacancies my first idea was to spider site links using Capybara. This felt clunky. Fortunately, I realised I could exploit pagination instead. I could simply increment the url's page number. This, however, raised a new problem: when to stop incrementing? I searched for a pattern I could exploit — something, for instance, like a last page attribute in a href attribute of a relevant link — but I couldn’t find anything. Right now, my stopping condition is arbitrary.
 
 ## TODOs ##
 
@@ -64,4 +63,4 @@ I used these generic classes to help me reason about my own specific scraping do
 
 * __Rake task test__. Though the service objects my task points to are all tested, the rake task itself is not. I will plug this gap today (9/10/2017).
 
-* __Pagination__. I really want to address the above pagination issue. I want, that is, to dynamically generate the right page number at which to stop scraping vacancy links.
+* __Pagination__. I really want to address the above pagination issue. That is, I want to dynamically generate the right page number at which to stop scraping vacancy links.

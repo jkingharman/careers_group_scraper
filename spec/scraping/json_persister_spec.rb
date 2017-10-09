@@ -15,5 +15,6 @@ describe JSONPersister do
     it 'will convert the vacancy details to json' do
       expect(json_persister.perform(vacancies)).to eq(['{"Recruiter":"Anon","Salary":"£20,000","Location":"LDN","Job type":"Placement","Hours":"Full-time","Data posted":"03/10/2017","Degree Level":"Bachelor"}'])
     end
+    # I need to add a test for stdout here.
   end
 end
