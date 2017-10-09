@@ -10,7 +10,7 @@ Steps to scrape:
 git clone git@github.com:jkingharman/careers_group_scraper
 $ cd careers_group_scraper
 $ bundle
-$ rake scrap:vacancies_to_json[marketing]
+$ rake scrape:vacancies_to_json[marketing]
 ```
 
 ## Test ##
