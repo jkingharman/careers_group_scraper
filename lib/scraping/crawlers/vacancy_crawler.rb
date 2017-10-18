@@ -2,18 +2,19 @@
 
 class VacancyCrawler
   BASE_URL = 'https://jobonline.thecareersgroup.co.uk/careersgroup/student/'.freeze
-  PAGINATION_LIMIT = 20
+  PAGINATION_LIMIT = 1
 
   private
 
-  attr_reader :vacancy_links, :client_class, :page_count, :search_term, :listing_url
-  attr_accessor :client
+  # (2) wrap the client in a getter method
+  attr_reader :vacancy_links, :client, :page_count, :search_term, :listing_url
 
-  def initialize(search_term = nil, client_class = Mechanize)
+  # (1)
+  def initialize(search_term: nil, client: Mechanize.new)
     @page_count = 0
     @vacancy_links = []
     @search_term = search_term
-    @client_class = client_class
+    @client = client
     @listing_url = set_listing_url
   end
 
@@ -22,8 +23,8 @@ class VacancyCrawler
     @listing_url = "#{BASE_URL}/Vacancies.aspx?st=#{search_term}&page=#{page_count}"
   end
 
+  # you should override client here.
   def visit(url = listing_url)
-    client ||= client_class.new
     client.get(url)
   end
 
@@ -31,12 +32,19 @@ class VacancyCrawler
     link.dom_class == 'ovalbuttondetails'
   end
 
+  def get_vacancy_(link)
+    vacancy_links << link if vacancy?(link)
+  end
+
   def get_each_vacancy_link
-    visit.links.each { |link| vacancy_links.push(link) if vacancy?(link) }
+    visit.links.each { |link| get_vacancy_(link) }
   end
 
   def get_each_vacancy_link_on_every_listing
-    PAGINATION_LIMIT.times { get_each_vacancy_link; set_listing_url }
+    PAGINATION_LIMIT.times do
+      get_each_vacancy_link
+      set_listing_url
+    end
   end
 
   def get_vacancy_doc_at(link)
@@ -45,10 +53,9 @@ class VacancyCrawler
 
   public
 
+  # (4) Used map to make more efficient.
   def get_all_docs
-    vacancy_docs = []
     get_each_vacancy_link_on_every_listing
-    vacancy_links.each { |link| vacancy_docs << get_vacancy_doc_at(link) }
-    vacancy_docs
+    vacancy_links.map { |link| get_vacancy_doc_at(link) }
   end
 end

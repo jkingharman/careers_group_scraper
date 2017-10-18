@@ -2,7 +2,7 @@
 require_relative '../../lib/scraping/crawlers/vacancy_crawler'
 
 describe VacancyCrawler do
-  let(:client_class) { double(:client_class, new: client) }
+  # let(:client_class) { double(:client_class, new: client) }
   let(:search_term) { nil }
   let(:client) { double(:client, get: listing_page) }
 
@@ -13,7 +13,7 @@ describe VacancyCrawler do
   let(:html) { double(:html) }
   let(:vacancy_page) { double(:vacancy_page, body: html) }
 
-  subject(:vacancy_crawler) { described_class.new(search_term, client_class) }
+  subject(:vacancy_crawler) { described_class.new(search_term: search_term, client: client) }
 
   describe '#get_pages_to_scrap' do
     before do

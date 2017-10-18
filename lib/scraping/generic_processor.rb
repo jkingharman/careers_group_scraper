@@ -3,12 +3,12 @@
 class GenericProcessor
   private
 
-  attr_reader :crawler, :parser, :persister
+  attr_reader :crawler, :parser, :formatter
 
-  def initialize(crawler, parser, persister)
+  def initialize(crawler, parser, formatter)
     @crawler = crawler
     @parser = parser
-    @persister = persister
+    @formatter = formatter
   end
 
   public
@@ -16,6 +16,6 @@ class GenericProcessor
   def persist!
     docs = crawler.get_all_docs
     parsed_data = parser.parse_all_data_in(docs)
-    persister.perform(parsed_data)
+    formatter.format_(parsed_data)
   end
 end

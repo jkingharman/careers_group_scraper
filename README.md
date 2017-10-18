@@ -43,7 +43,7 @@ I used these generic classes to help me reason about my own specific scraping do
 
 * __VacancyParser__: understands how to extract vacancy details from html.
 
-* __JSONPersister__: understands how to persist extracted data to JSON.
+* __JSONFormatter__: understands how to persist extracted data to JSON.
 
 * __GenericProcessor__: understands how tie together all the objects involved in scrapping the careers group website.
 
