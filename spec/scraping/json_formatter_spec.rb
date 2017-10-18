@@ -11,7 +11,7 @@ describe JSONFormatter do
 
   describe '#format_' do
     it 'will convert the vacancy details to json' do
-      expect(json_formatter.format_(vacancies)).to be_json
+      expect(json_formatter.call(vacancies)).to be_json
     end
   end
 end

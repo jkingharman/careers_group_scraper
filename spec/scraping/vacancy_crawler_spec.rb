@@ -22,11 +22,11 @@ describe VacancyCrawler do
     end
 
     it 'will scrap links to specific vacencies (and only vacencies) from job listing pages' do
-      expect { vacancy_crawler.get_all_docs }.to change { vacancy_crawler.send(:vacancy_links) }.from([]).to([vacancy_link_one])
+      expect { vacancy_crawler.call }.to change { vacancy_crawler.send(:vacancy_links) }.from([]).to([vacancy_link_one])
     end
 
     it 'will scrap specific vacancy pages' do
-      expect(vacancy_crawler.get_all_docs).to eq([html])
+      expect(vacancy_crawler.call).to eq([html])
     end
   end
 end

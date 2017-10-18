@@ -1,9 +1,6 @@
 
 
 class GenericProcessor
-  private
-
-  attr_reader :crawler, :parser, :formatter
 
   def initialize(crawler, parser, formatter)
     @crawler = crawler
@@ -11,11 +8,14 @@ class GenericProcessor
     @formatter = formatter
   end
 
-  public
-
   def persist!
     docs = crawler.call
     docs.map! { |doc| parser.call(doc) }
     formatter.call(docs)
   end
+
+  private
+
+  attr_reader :crawler, :parser, :formatter
+
 end
