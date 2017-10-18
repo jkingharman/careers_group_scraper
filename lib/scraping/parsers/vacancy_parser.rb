@@ -5,7 +5,7 @@ class VacancyParser
     @html_parser = html_parser
   end
 
-  def parse(doc)
+  def call(doc)
     vacancy = build_vacancy(doc)
     remove_whitespace_in(vacancy)
   end

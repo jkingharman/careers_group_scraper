@@ -1,7 +1,7 @@
 
 
 class JSONFormatter
-  def format_(data)
+  def call(data)
     data.to_json
   end
 end
