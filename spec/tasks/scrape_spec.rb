@@ -17,11 +17,11 @@ describe 'scrape:vacencies_to_json' do
 
   before do
     allow(ScraperJob).to receive(:new).and_return(scraper_job)
-    allow(scraper_job).to receive(:perform)
+    allow(scraper_job).to receive(:persist!)
   end
 
   it 'performs the scraper job' do
-    expect(scraper_job).to receive(:perform)
+    expect(scraper_job).to receive(:persist!)
     subject.invoke
   end
 end

@@ -1,7 +1,27 @@
 
+require 'nokogiri'
+
+require_relative '../scraping/crawlers/vacancy_crawler'
+require_relative '../scraping/parsers/vacancy_parser'
+require_relative '../scraping/formatters/json_formatter'
 
 class ScraperJob
-  def perform(processor_class, crawler_class, parser_class, formatter_class, search_term = nil)
-    processor_class.new(crawler_class.new(search_term: search_term), parser_class.new, formatter_class.new).persist!
+  def initialize(search_term = nil,
+      parser: VacancyParser.new,
+      formatter: JSONFormatter.new,
+      crawler: VacancyCrawler.new(search_term))
+    @parser = parser
+    @crawler = crawler
+    @formatter = formatter
   end
+
+  def persist!
+    docs = crawler.call
+    docs.map! { |doc| parser.call(doc) }
+    formatter.call(docs)
+  end
+
+  private
+
+  attr_reader :crawler, :parser, :formatter
 end

@@ -2,37 +2,34 @@
 require_relative '../../lib/scraping/scraper_job'
 
 describe ScraperJob do
-  let(:processor_class) { double(:processor_class, new: processor) }
-  let(:processor) { double(:processor, persist!: nil) }
-  let(:crawler_class) { double(:crawler_class, new: nil) }
-  let(:parser_class) { double(:parser_class, new: nil) }
-  let(:persister_class) { double(:persister_class, new: nil) }
+  let(:doc) { double(:doc) }
+  let(:search_term) { nil }
+  let(:docs) { [doc] }
+  let(:crawler) { double(:crawler, call: docs) }
+  let(:parser) { double(:parser) }
+  let(:formatter) { double(:formatter) }
 
-  subject(:scraper_job) { described_class.new }
+  subject(:scraper_job) { described_class.new(search_term,
+    crawler: crawler,
+    parser: parser,
+    formatter: formatter) }
 
-  before do
-    scraper_job.perform(processor_class, crawler_class, parser_class, persister_class)
-  end
-
-  describe '#perform' do
-    it 'will instaniate a processor' do
-      expect(processor_class).to have_received(:new)
+  describe '#persist!' do
+    before do
+      allow(parser).to receive(:call).with(doc)
+      allow(formatter).to receive(:call).with(docs)
+      scraper_job.persist!
+    end
+    it 'will get vacancy pages from the crawler' do
+      expect(crawler).to have_received(:call)
     end
 
-    it 'will instaniate a crawler' do
-      expect(crawler_class).to have_received(:new)
+    it 'will get vacancy details from the parser' do
+      expect(parser).to have_received(:call)
     end
 
-    it 'will instaniate a parser' do
-      expect(parser_class).to have_received(:new)
-    end
-
-    it 'will instaniate a persister' do
-      expect(persister_class).to have_received(:new)
-    end
-
-    it 'will persist the scrapped data' do
-      expect(processor).to have_received(:persist!)
+    it 'will tell the persister to persist the vacancy details' do
+      expect(formatter).to have_received(:call)
     end
   end
 end

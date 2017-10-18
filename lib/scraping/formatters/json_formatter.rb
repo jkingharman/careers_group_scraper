@@ -1,4 +1,5 @@
 
+require 'json'
 
 class JSONFormatter
   def call(data)

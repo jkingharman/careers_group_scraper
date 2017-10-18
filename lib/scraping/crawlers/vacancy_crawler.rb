@@ -1,4 +1,5 @@
 
+require 'mechanize'
 
 class VacancyCrawler
   BASE_URL = 'https://jobonline.thecareersgroup.co.uk/careersgroup/student/'.freeze
@@ -9,7 +10,7 @@ class VacancyCrawler
     vacancy_links.map { |link| scrape_vacancy_page(link) }
   end
 
-  def initialize(search_term: nil, client: Mechanize.new)
+  def initialize(search_term = nil, client: Mechanize.new)
     @page_count = 0
     @vacancy_links = []
     @client = client

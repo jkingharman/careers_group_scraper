@@ -13,7 +13,7 @@ describe VacancyCrawler do
   let(:html) { double(:html) }
   let(:vacancy_page) { double(:vacancy_page, body: html) }
 
-  subject(:vacancy_crawler) { described_class.new(search_term: search_term, client: client) }
+  subject(:vacancy_crawler) { described_class.new(search_term, client: client) }
 
   describe '#get_pages_to_scrap' do
     before do

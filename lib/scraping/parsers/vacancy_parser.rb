@@ -1,7 +1,7 @@
 
 
 class VacancyParser
-  def initialize(html_parser = Nokogiri)
+  def initialize(html_parser: Nokogiri)
     @html_parser = html_parser
   end
 

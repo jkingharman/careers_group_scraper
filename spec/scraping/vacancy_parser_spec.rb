@@ -13,7 +13,7 @@ describe VacancyParser do
   let(:details_three) { double(:details_three, text: 'Job sector:', next: details_four) }
   let(:details_four) { double(:details_four, text: nil, next: nil) }
 
-  subject(:vacancy_parser) { described_class.new(parser) }
+  subject(:vacancy_parser) { described_class.new(html_parser: parser) }
 
   before do
     allow(parser::HTML::Document).to receive(:parse).and_return(doc)
@@ -26,8 +26,7 @@ describe VacancyParser do
     end
 
     it 'will extract the injected doc\'s job details' do
-      expect(vacancy_parser.call(doc)).to eq({ nil => 'vacency detail' })
+      expect(vacancy_parser.call(doc)).to eq(nil => 'vacency detail')
     end
-
   end
 end
