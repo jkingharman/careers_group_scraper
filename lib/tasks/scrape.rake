@@ -13,7 +13,7 @@ require_relative '../scraping/scraper_job'
 namespace :scrape do
   desc 'Jsonify data on job vacancies from careers group'
   task :vacancies_to_json, [:search_term] do |_t, args|
-    ScraperJob.new.perform(GenericProcessor, VacancyCrawler,
-                           VacancyParser, JSONFormatter, args[:search_term])
+    puts ScraperJob.new.perform(GenericProcessor, VacancyCrawler,
+                                VacancyParser, JSONFormatter, args[:search_term])
   end
 end

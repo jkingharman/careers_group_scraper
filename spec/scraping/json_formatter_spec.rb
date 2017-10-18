@@ -5,7 +5,7 @@ require 'json'
 
 describe JSONFormatter do
   let(:vacancies) do
-    [{'detail_category' => 'detail_particular'}, {'detail_category' => 'detail_particular'}]
+    [{ 'detail_category' => 'detail_particular' }, { 'detail_category' => 'detail_particular' }]
   end
   subject(:json_formatter) { described_class.new }
 

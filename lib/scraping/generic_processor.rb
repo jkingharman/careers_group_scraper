@@ -15,7 +15,7 @@ class GenericProcessor
 
   def persist!
     docs = crawler.get_all_docs
-    parsed_data = parser.parse_all_data_in(docs)
-    formatter.format_(parsed_data)
+    docs.map! { |doc| parser.parse(doc) }
+    formatter.format_(docs)
   end
 end
