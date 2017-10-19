@@ -1,4 +1,5 @@
 
+require 'nokogiri'
 
 class VacancyParser
   def initialize(html_parser: Nokogiri)

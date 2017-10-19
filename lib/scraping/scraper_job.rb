@@ -1,5 +1,4 @@
 
-require 'nokogiri'
 
 require_relative '../scraping/crawlers/vacancy_crawler'
 require_relative '../scraping/parsers/vacancy_parser'

@@ -1,17 +1,16 @@
 
+# break this test to increase your confidence here.
 
 require_relative '../../lib/scraping/formatters/json_formatter'
-require 'json'
 
 describe JSONFormatter do
   let(:vacancies) do
     [{ 'detail_category' => 'detail_particular' }, { 'detail_category' => 'detail_particular' }]
   end
-  subject(:json_formatter) { described_class.new }
 
   describe '#format_' do
-    it 'will convert the vacancy details to json' do
-      expect(json_formatter.call(vacancies)).to be_json
+    it 'will format the vacancy details in json' do
+      expect(subject.call(vacancies)).to be_json
     end
   end
 end

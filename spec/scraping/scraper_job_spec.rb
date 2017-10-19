@@ -2,33 +2,30 @@
 require_relative '../../lib/scraping/scraper_job'
 
 describe ScraperJob do
-  let(:doc) { double(:doc) }
-  let(:search_term) { nil }
-  let(:docs) { [doc] }
+  let(:docs) { [double(:doc)] }
   let(:crawler) { double(:crawler, call: docs) }
   let(:parser) { double(:parser) }
   let(:formatter) { double(:formatter) }
 
-  subject(:scraper_job) { described_class.new(search_term,
-    crawler: crawler,
+  subject { described_class.new(crawler: crawler,
     parser: parser,
     formatter: formatter) }
 
   describe '#persist!' do
     before do
-      allow(parser).to receive(:call).with(doc)
+      allow(parser).to receive(:call).with(docs[0])
       allow(formatter).to receive(:call).with(docs)
-      scraper_job.persist!
+      subject.persist!
     end
-    it 'will get vacancy pages from the crawler' do
+    it 'will tell the crawler to find vacancy pages' do
       expect(crawler).to have_received(:call)
     end
 
-    it 'will get vacancy details from the parser' do
+    it 'will tell the parser to hashify vacancy details' do
       expect(parser).to have_received(:call)
     end
 
-    it 'will tell the persister to persist the vacancy details' do
+    it 'will tell the formatter to jsonify the hashed details' do
       expect(formatter).to have_received(:call)
     end
   end
