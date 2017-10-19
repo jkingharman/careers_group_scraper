@@ -15,7 +15,7 @@ describe ScraperJob do
     before do
       allow(parser).to receive(:call).with(docs[0])
       allow(formatter).to receive(:call).with(docs)
-      subject.persist!
+      subject.call
     end
     it 'will tell the crawler to find vacancy pages' do
       expect(crawler).to have_received(:call)

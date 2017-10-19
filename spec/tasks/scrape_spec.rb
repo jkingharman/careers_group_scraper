@@ -5,7 +5,7 @@ require 'rake'
 
 describe 'scrape:vacencies_to_json' do
   subject { Rake.application.tasks[1] }
-  let(:scraper_job) { double(:scraper_job, persist!: '[{}]') }
+  let(:scraper_job) { double(:scraper_job, call: '[{}]') }
 
   before do
     Rake.application.rake_require 'tasks/scrape'

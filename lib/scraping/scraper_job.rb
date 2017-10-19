@@ -14,7 +14,7 @@ class ScraperJob
     @formatter = formatter
   end
 
-  def persist!
+  def call
     docs = crawler.call
     docs.map! { |doc| parser.call(doc) }
     formatter.call(docs)
