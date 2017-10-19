@@ -1,18 +1,13 @@
 
 source 'https://rubygems.org'
 
-group :test do
-  gem 'nokogiri'
-  gem 'rake'
-  gem 'rake'
-  gem 'rspec'
-end
+gem 'nokogiri'
+gem 'mechanize'
+gem 'rake'
+gem 'json'
 
-group :development do
-  gem 'json'
-  gem 'mechanize'
+group :test, :development do
+  gem 'rspec'
   gem 'pry'
-  gem 'rake'
   gem 'rspec-json_matchers'
-  gem 'nokogiri'
 end
