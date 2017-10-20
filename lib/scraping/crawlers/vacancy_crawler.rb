@@ -3,7 +3,7 @@ require 'mechanize'
 
 class VacancyCrawler
   BASE_URL = 'https://jobonline.thecareersgroup.co.uk/careersgroup/student/'.freeze
-  PAGINATION_LIMIT = 2
+  PAGINATION_LIMIT = 20
 
   def call
     scrape_each_listing
