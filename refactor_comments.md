@@ -20,8 +20,7 @@ I removed ‘puts’ from what was ‘JSONPersister’. As it stood, the class w
 
 __Service object best practice__
 
-I worked to restrict my service objects to one public method that reflects their responsibility. Given this, I felt it was appropriate to follow your suggestion and name this method ‘call’. I like the consistency this creates but also how it makes the objects look like
-functions themselves.
+I worked to restrict my service objects to one public method that reflects their responsibility. Given this, I felt it was appropriate to follow your suggestion and name this method ‘call’. I like the consistency this creates but also how it makes the objects look like functions themselves.
 
 __Simplified the design by removing GenericProcessor__
 
@@ -52,4 +51,4 @@ sent properly.
 
 __VCR__
 
-I ended up trying to use the vcr gem because I needed a way of not mocking Mechanise while also not hitting the careersgroup site every time I run rspec. The tech is still largely a block-box to me, though I intend to read more of the docs tonight.
+I ended up trying to use the vcr gem because I needed a way of not mocking mechanise while also not hitting the careersgroup site every time I run rspec. The tech is still largely a black-box to me, though I intend to read more of the docs tonight.
