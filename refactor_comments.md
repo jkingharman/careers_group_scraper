@@ -52,4 +52,4 @@ sent properly.
 
 __VCR__
 
-I ended up trying to use the vcr gem because I needed a way of not mocking Mechanise while also not hitting the careersgroup site every time I run spec. The tech is still largely a block-box to me, though I tend to read more of the docs tonight.
+I ended up trying to use the vcr gem because I needed a way of not mocking Mechanise while also not hitting the careersgroup site every time I run rspec. The tech is still largely a block-box to me, though I intend to read more of the docs tonight.
