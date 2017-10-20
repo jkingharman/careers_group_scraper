@@ -42,7 +42,7 @@ Tried to simplify tests while taking onboard your remarks about them when we spo
 
 I feel the basic problem with my specs before was that they weren’t testing the right thing because of mocking. Mainly, I was simply reflecting the flow of logic through my methods by stubbing calls on my dependencies and canning values. I see two major costs to this. One is that it means my tests where closely tied to my implementation (whenever I changed internal methods the tests would fail). The other is that I couldn’t have confidence my parser, crawler, or formatter’s behaviour was correct where it matters.
 
-For me, with all these unit’s, it seems the important thing to ask is: given certain input, do you return  certain state? Consider VacancyParser. Here I want to know that if a vacancy html doc with a certain structure goes in, a hash with certain key-value pairs comes out. Previously, my spec didn’t test this. But now it does I believe. What I can’t figure out is whether there’s a way of having confidence that
+For me, with all these units, it seems the important thing to ask is: given certain input, do you return  certain state? Consider VacancyParser. Here I want to know that if a vacancy html doc with a certain structure goes in, a hash with certain key-value pairs comes out. Previously, my spec didn’t test this. But now it does I believe. What I can’t figure out is whether there’s a way of having confidence that
 my unit’s here return the state I need, without passing them the real dependencies they wrap (nokogiri and mechanise).
 
 __Outgoing command messages__
