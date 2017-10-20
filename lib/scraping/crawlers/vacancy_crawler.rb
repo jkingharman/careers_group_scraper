@@ -3,10 +3,10 @@ require 'mechanize'
 
 class VacancyCrawler
   BASE_URL = 'https://jobonline.thecareersgroup.co.uk/careersgroup/student/'.freeze
-  PAGINATION_LIMIT = 1
+  PAGINATION_LIMIT = 20
 
   def call
-    scrape_each_vacancy_link
+    scrape_each_listing
     vacancy_links.map { |link| scrape_vacancy_page(link) }
   end
 
@@ -24,7 +24,7 @@ class VacancyCrawler
 
   def set_listing_url
     @page_count += 1
-    @listing_url = "#{BASE_URL}/Vacancies.aspx?st=#{search_term}&page=#{page_count}"
+    @listing_url = "#{BASE_URL}Vacancies.aspx?st=#{search_term}&page=#{page_count}"
   end
 
   def visit(url = listing_url)
@@ -50,8 +50,7 @@ class VacancyCrawler
     end
   end
 
-  # revert back to string interpolate
   def scrape_vacancy_page(link)
-    visit((BASE_URL + link.href).to_s).body
+    visit(BASE_URL + "#{link.href}")
   end
 end

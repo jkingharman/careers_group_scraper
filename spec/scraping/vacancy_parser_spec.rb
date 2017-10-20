@@ -1,25 +1,30 @@
 
-
-require_relative '../../lib/scraping/parsers/vacancy_parser'
 require 'nokogiri'
+require 'mechanize'
+require_relative '../../lib/scraping/parsers/vacancy_parser'
 
-describe VacancyParser do
-  let(:parser) { Nokogiri }
-  let(:doc) { double(:doc, css: vacancy_details) }
-  let(:vacancy_details) { [detail_one] }
+describe VacancyParser, :vcr do
+  subject { described_class.new }
 
-  let(:detail_one) { double(:detail_one, text: 'detail category', next: detail_two) }
-  let(:detail_two) { double(:detail_two, text: 'detail particular') }
-
-  subject { described_class.new(html_parser: parser) }
+  let(:expected_hash) do
+    { 'Recruiter:' => 'Educo Ltd',
+      'Salary:' => '£15 p/hr to £30 p/hr',
+      'Location:' => 'London', 'Job type:' => 'Temporary',
+      'Hours:' => 'Part-time', 'Date posted:' => '13/10/2017',
+      'Degree Level:' => 'N/A' }
+  end
 
   describe '#call' do
-      before do
-        allow(parser::HTML::Document).to receive(:parse).and_return(doc)
-      end
+    VCR.use_cassette('vacancy_page') do
+      page = Mechanize.new.get('https://jobonline.thecareersgroup.co.uk/careersgroup/student/DisplayVacancy.aspx?id=d4552df3-9d1c-451a-87ca-53ef15cecc33')
+      doc = page.body
 
-    it 'will hashify vacancy page job details' do
-      expect(subject.call(doc)).to eq('detail category' => 'detail particular')
+      it 'will hashify the vacancy page details' do
+        expect(subject.call(doc)).to eq('Recruiter:' => 'Educo Ltd',
+                                        'Salary:' => '£15 p/hr to £30 p/hr', 'Location:' => 'London',
+                                        'Job type:' => 'Temporary', 'Hours:' => 'Part-time',
+                                        'Date posted:' => '13/10/2017', 'Degree Level:' => 'N/A')
+      end
     end
   end
 end

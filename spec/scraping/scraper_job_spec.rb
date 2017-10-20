@@ -2,18 +2,20 @@
 require_relative '../../lib/scraping/scraper_job'
 
 describe ScraperJob do
-  let(:docs) { [double(:doc)] }
+  let(:docs) { [double(:doc, body: nil)] }
   let(:crawler) { double(:crawler, call: docs) }
   let(:parser) { double(:parser) }
   let(:formatter) { double(:formatter) }
 
-  subject { described_class.new(crawler: crawler,
-    parser: parser,
-    formatter: formatter) }
+  subject do
+    described_class.new(crawler: crawler,
+                        parser: parser,
+                        formatter: formatter)
+  end
 
   describe '#persist!' do
     before do
-      allow(parser).to receive(:call).with(docs[0])
+      allow(parser).to receive(:call).with(docs[0].body)
       allow(formatter).to receive(:call).with(docs)
       subject.call
     end

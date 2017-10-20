@@ -14,6 +14,6 @@ describe 'scrape:vacencies_to_json' do
   end
 
   it 'will \'puts\' the scraped vacancy details to stdout' do
-    expect{subject.invoke}.to output("[{}]\n").to_stdout
+    expect { subject.invoke }.to output("[{}]\n").to_stdout
   end
 end

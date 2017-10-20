@@ -1,6 +1,4 @@
 
-# break this test to increase your confidence here.
-
 require_relative '../../lib/scraping/formatters/json_formatter'
 
 describe JSONFormatter do

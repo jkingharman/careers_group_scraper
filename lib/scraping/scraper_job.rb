@@ -6,9 +6,9 @@ require_relative '../scraping/formatters/json_formatter'
 
 class ScraperJob
   def initialize(search_term = nil,
-      parser: VacancyParser.new,
-      formatter: JSONFormatter.new,
-      crawler: VacancyCrawler.new(search_term))
+                 parser: VacancyParser.new,
+                 formatter: JSONFormatter.new,
+                 crawler: VacancyCrawler.new(search_term))
     @parser = parser
     @crawler = crawler
     @formatter = formatter
@@ -16,7 +16,7 @@ class ScraperJob
 
   def call
     docs = crawler.call
-    docs.map! { |doc| parser.call(doc) }
+    docs.map! { |doc| parser.call(doc.body) }
     formatter.call(docs)
   end
 
