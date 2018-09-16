@@ -1,10 +1,11 @@
 # Careers_Group_Scraper
 
-A rake task that scrapes job adverts from the [Careers Group job board](https://jobonline.thecareersgroup.co.uk/careersgroup/student/)
+A rake task that scrapes job adverts from the [Careers Group job board](https://jobonline.thecareersgroup.co.uk/careersgroup/student/). I wrote
+this for a technical test while job-hunting in 2017.
 
 ## Description ##
 
-The scraper accepts a search term (e.g. 'infosec'). It makes a request to a listings page related to your search, scrapes vacancies it finds, then formats its payload as JSON.
+The scraper accepts an optional search term (e.g. 'business development'). It makes a request to a listings page related to your search, scrapes vacancies it finds, then formats its payload as JSON.
 
 Example output (for one job):
 
@@ -20,15 +21,15 @@ Example output (for one job):
 }
 ```
 
-## Run ##
+## To use ##
 
 Do this:
 
 ```
 git clone git@github.com:jkingharman/careers_group_scraper
-$ cd careers_group_scraper
-$ bundle
-$ rake scrape:vacancies_to_json["optional search term here"]
+cd careers_group_scraper
+bundle instal
+rake careers_group:vacancies_to_json["optional search term"]
 ```
 
 ## Test ##
@@ -44,10 +45,6 @@ $ rspec -fd
 * VCR so I can mock web requests.
 * Rspec so I can test.
 
-## Design ##
-
-TODO
-
 ## Challenges ##
 
 * __Scraping job details__. I couldn't find a HTML pattern that would allow scraping everything in one fell css selection. The div I hit missed two details: job description and title. I omitted these because I felt another selection would mean code bloat. But I'm not sure this was wise. However the scraped data is used, those details are important commercially.
@@ -57,9 +54,3 @@ TODO
 ## TODOs ##
 
 * __Exceptions__. I don't log exceptions; changing this is a must. I am now aware just how brittle scrapers can be. They are hostage to external influence: the servers they query, HTTP connection, HTML structure, etc. And so trying to anticipate failure points is important. One obvious amendment I can think of, for example, is to log exceptions when a queried page doesn’t have the css I'm looking for. Also obvious: I could  account for dud http requests.
-
-* __Pagination__. I'll address the above pagination issue. I want to dynamically generate the right page number at which to stop scraping job links.
-
-## Tests ##
-
-![alt text](https://user-images.githubusercontent.com/24657744/31845725-f659606e-b5fb-11e7-91b4-ed40284f3266.png)
