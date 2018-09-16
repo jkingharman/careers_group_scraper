@@ -1,9 +1,7 @@
-
-
 require 'spec_helper'
 require 'rake'
 
-describe 'scrape:vacencies_to_json' do
+describe 'careers_group:scraper_service' do
   subject { Rake.application.tasks[1] }
   let(:scraper_job) { double(:scraper_job, call: '[{}]') }
 
