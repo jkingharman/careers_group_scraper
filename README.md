@@ -5,7 +5,7 @@ this for a technical test while job-hunting in 2017.
 
 ## Description ##
 
-The scraper accepts an optional search term (e.g. 'business development'). It makes a request to a listings page related to your search, scrapes vacancies it finds, then formats its payload as JSON.
+The task accepts an optional search term (e.g. 'business development'). It makes a request to a listings page related to your search, scrapes vacancies it finds, then formats its payload as JSON.
 
 Example output (for one job):
 
@@ -35,7 +35,7 @@ rake careers_group:vacancies_to_json["optional search term"]
 ## Test ##
 
 ```
-$ rspec -fd
+rspec -fd
 ```
 
 ## Dependencies ##
@@ -51,6 +51,6 @@ $ rspec -fd
 
 * __Scraping links__. How to get links from all listings? Capybara perhaps. But programmatically clinking around felt clunky. I realised I could exploit pagination: I could simply increment the listing url's page number. But this raised a new issue, namely: when to stop? I looked for a pattern — something like a 'last page' attribute on a next button — but found nothing. And so my stopping condition is arbitrary (I stop incrementing on page twenty).
 
-## TODOs ##
+## Todos ##
 
-* __Exceptions__. I don't log exceptions; changing this is a must. I am now aware just how brittle scrapers can be. They are hostage to external influence: the servers they query, HTTP connection, HTML structure, etc. And so trying to anticipate failure points is important. One obvious amendment I can think of, for example, is to log exceptions when a queried page doesn’t have the css I'm looking for. Also obvious: I could  account for dud http requests.
+* __Exceptions__. I don't handle exceptions; changing this is a must. I am now aware just how brittle scrapers can be. They are hostage to external influence: the servers they query, HTTP connection, HTML structure, etc. And so trying to anticipate failure points is important. One obvious amendment I can think of for example is to log exceptions when a queried page doesn’t have the CSS I'm looking for. Also obvious: account for dud HTTP requests.
