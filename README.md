@@ -28,7 +28,7 @@ Do this:
 ```
 git clone git@github.com:jkingharman/careers_group_scraper
 cd careers_group_scraper
-bundle instal
+bundle install
 rake careers_group:vacancies_to_json["optional search term"]
 ```
 
