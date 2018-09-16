@@ -1,4 +1,5 @@
 module CareersGroupScraper
+  # Coordinate each big part of the service: scraping and formatting.
   class ScraperService
     def initialize(search_term = nil,
                    formatter: JobFormatter.new,
