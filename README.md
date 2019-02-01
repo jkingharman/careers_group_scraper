@@ -21,7 +21,7 @@ Example output (for one job):
 }
 ```
 
-## To use ##
+## How do I start? ##
 
 Do this:
 
@@ -32,7 +32,7 @@ bundle install
 rake careers_group:vacancies_to_json["optional search term"]
 ```
 
-## Test ##
+## And to test? ##
 
 ```
 rspec -fd
@@ -45,12 +45,12 @@ rspec -fd
 * VCR so I can mock web requests.
 * Rspec so I can test.
 
-## Challenges ##
+## Any challenges? ##
 
-* __Scraping job details__. I couldn't find a HTML pattern that would allow scraping everything in one fell css selection. The div I hit missed two details: job description and title. I omitted these because I felt another selection would mean code bloat. But I'm not sure this was wise. However the scraped data is used, those details are important commercially.
+* __Scraping job details__. I couldn't find a HTML pattern that would allow scraping everything in one fell CSS selection. The div I hit missed two details: job description and title. I omitted these because I felt another selection would mean code bloat. But I'm not sure this was wise. However the scraped data is used those details are important commercially.
 
-* __Scraping links__. How to get links from all listings? Capybara perhaps. But programmatically clinking around felt clunky. I realised I could exploit pagination: I could simply increment the listing url's page number. But this raised a new issue, namely: when to stop? I looked for a pattern — something like a 'last page' attribute on a next button — but found nothing. And so my stopping condition is arbitrary (I stop incrementing on page twenty).
+* __Scraping links__. How to get links from all listings? Capybara perhaps. But programmatically clinking around felt clunky. I realised I could use pagination. I could simply increment the listing URL's page number. But this raised a new issue: when to stop? I looked for a pattern — something like a 'last page' attribute on a next button — but found nothing. And so my stopping condition is arbitrary (page twenty).
 
 ## Todos ##
 
-* __Exceptions__. I don't handle exceptions; changing this is a must. I am now aware just how brittle scrapers can be. They are hostage to external influence: the servers they query, HTTP connection, HTML structure, etc. And so trying to anticipate failure points is important. One obvious amendment I can think of for example is to log exceptions when a queried page doesn’t have the CSS I'm looking for. Also obvious: account for dud HTTP requests.
+* __Exceptions__. I don't log or handle exceptions; changing this is a must. I now know just how brittle scrapers can be. They're hostage to external influence: the servers they query, HTTP connection, markup changes, etc. And so trying to spot failure points is important.
