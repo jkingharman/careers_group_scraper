@@ -1,7 +1,7 @@
 # Careers Group Scraper
 
 A rake task that scrapes job adverts from the [Careers Group job board](https://jobonline.thecareersgroup.co.uk/careersgroup/student/). I wrote
-this for a technical test while job-hunting in 2017.
+this for a technical test while job-hunting in 2017. As of 2019, Careers Group requires a login for the job board so the scraper no longer works.
 
 ## Description ##
 
